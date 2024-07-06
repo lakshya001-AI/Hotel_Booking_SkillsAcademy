@@ -1,0 +1,7 @@
+In this project we have to build a Application were we can Book a Hotel ,  The user is going to select the Destination , Date, no. of Guests 
+And accordingly we are going to show the hotels to them.
+As soon as the user clicks on the Book Button the page will open showing the hotel images and Book option 
+
+And here we also have to design a Admin page where the Admin can see the user Data , add the user and delete the users , add the Hotels  
+
+For the Authentication use the JWT or Passport.JS - This is Necessary 

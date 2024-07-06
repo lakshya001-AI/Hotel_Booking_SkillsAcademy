@@ -66,3 +66,9 @@ html, body{
     cursor: pointer;
     color: white;
 }
+
+.hotelSearchDivMain{
+    width: 100vw;
+    height: 40vw;
+    background-color: black;
+}

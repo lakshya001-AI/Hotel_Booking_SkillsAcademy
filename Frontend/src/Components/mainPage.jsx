@@ -21,7 +21,15 @@ export default function MainPage() {
           </div>
         </div>
         {/* Booking Data section and Search Button to search for the Hotels */}
-        
+        <div className={Style.bookingInfoDivMain}>
+          <div className={Style.bookingInfoDiv}>
+            <div className={Style.overlay}>
+              <p className={Style.bookingParaIntro}>Your Perfect Stay at the Best Price</p>
+              <p className={Style.bookingParaIntro1}>We bring together the peoples, brands and technology that enables the success of other - welcoming every guest , families, everywhere there journey takes them !!</p>
+
+            </div>
+          </div>
+        </div>
 
         {/* Hotel List based on the user data selected */}
       </div>

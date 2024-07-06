@@ -14,8 +14,8 @@ html, body{
 /* ------------------ Main Page Div ------------------- */
 
 .mainDivMainPage{
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    height: 100%;
     background-color: #FFFFFF;
     color: black;
 }
@@ -61,14 +61,73 @@ html, body{
     padding: 10px 20px;
     font-size: 15px;
     border-radius: 20px;
-    background-color:  #0074ff;
+    /* background-color:  #0074ff; */
+    background: linear-gradient(to right, #0074ff, #00c6ff);
     border: 0;
     cursor: pointer;
     color: white;
 }
 
-.hotelSearchDivMain{
-    width: 100vw;
-    height: 40vw;
-    background-color: black;
+.createAccountBtn:hover{
+    padding: 10px 20px;
+    font-size: 15px;
+    border-radius: 20px;
+    /* background-color:  #0074ff; */
+    background: linear-gradient(to left, #0074ff, #00c6ff);
+    border: 0;
+    cursor: pointer;
+    color: white;
+}
+
+.bookingInfoDivMain{
+    width: 100%;
+    height: 80vh; /* Adjust the height as needed */
+    padding: 20px 50px;
+}
+
+.bookingInfoDiv{
+    position: relative;
+    width: 100%;
+    height: 80vh; /* Adjust the height as needed */
+    background: url('/Assets/hotelbookingimages.png') no-repeat center center/cover;
+    /* display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden; */
+    border-radius: 20px;
+
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7); /* Black overlay with 50% opacity */
+    display: flex;
+    align-items: center;
+    color: white; 
+    flex-direction: column;
+    padding: 20px;
+    box-sizing: border-box;
+    border-radius: 20px;
+    text-align: center;
+}
+
+
+
+.bookingParaIntro{
+    width: 800px;
+    font-size: 60px; /* Adjust the font size as needed */
+    color: rgb(217, 217, 217);
+    font-weight: 600;
+    margin-top: 50px;
+}
+
+.bookingParaIntro1{
+    width: 870px;
+    font-size: 22px; /* Adjust the font size as needed */
+    color: rgb(217, 217, 217);
+    margin-top: 40px;
 }

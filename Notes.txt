@@ -5,3 +5,10 @@ As soon as the user clicks on the Book Button the page will open showing the hot
 And here we also have to design a Admin page where the Admin can see the user Data , add the user and delete the users , add the Hotels  
 
 For the Authentication use the JWT or Passport.JS - This is Necessary 
+
+
+Here we have used the .env file store all kind of data 
+then we have installed the dotenv inorder to excess the .env file data 
+const dotenv = require("dotenv)
+dotenv.config()
+by using the process.env.PORT we can get the data of the env file 

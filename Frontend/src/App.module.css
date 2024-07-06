@@ -19,3 +19,12 @@ html, body{
     background-color: #FFFFFF;
     color: black;
 }
+
+.navBarHeading{
+    padding: 20px;
+}
+
+.headingPara{
+    font-size: 25px;
+    font-weight: 400;
+}

@@ -6,7 +6,12 @@ export default function MainPage() {
   <div className={Style.mainDivMainPage}>
     {/* Navbar section that will contain the login and create account and the user Profile (if the user successful login )*/}
     <div className={Style.navBar}>
-      
+      <div className={Style.navBarHeading}>
+        <p className={Style.headingPara}>HotelBooking</p>
+        <div className={Style.loginAndSignUpDiv}>
+
+        </div>
+      </div>
     </div>
     {/* Booking Data section and Search Button to search for the Hotels */}
     {/* Hotel List based on the user data selected */}

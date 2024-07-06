@@ -19,12 +19,23 @@ html, body{
     background-color: #FFFFFF;
     color: black;
 }
+.navBar{
+    width: 100%;
+}
 
 .navBarHeading{
+    width: 20%;
     padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logoImage{
+    width: 70px;
 }
 
 .headingPara{
-    font-size: 25px;
+    font-size: 30px;
     font-weight: 400;
 }

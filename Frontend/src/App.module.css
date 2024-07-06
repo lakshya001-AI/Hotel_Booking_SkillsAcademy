@@ -46,3 +46,23 @@ html, body{
     font-size: 30px;
     font-weight: 600;
 }
+
+.loginBtn{
+    padding: 10px 40px;
+    font-size: 15px;
+    border-radius: 20px;
+    background-color: white;
+    border: solid 1px black;
+    cursor: pointer;
+    margin-right: 20px;
+}
+
+.createAccountBtn{
+    padding: 10px 20px;
+    font-size: 15px;
+    border-radius: 20px;
+    background-color:  #0074ff;
+    border: 0;
+    cursor: pointer;
+    color: white;
+}

@@ -8,8 +8,12 @@ export default function MainPage() {
     <div className={Style.navBar}>
       <div className={Style.navBarHeading}>
         <img src="/Assets/HBooking.png" alt="Hotel Booking Logo" className={Style.logoImage}/>
-        <p className={Style.headingPara}>HotelBooking</p>
+        <p className={Style.headingPara}>HBooking</p>
 
+        </div>
+        <div className={Style.loginAndCreateAccountDiv}>
+          <button className={Style.loginBtn}>login</button>
+          <button className={Style.createAccountBtn}>Create Account</button>
         </div>
       </div>
     </div>

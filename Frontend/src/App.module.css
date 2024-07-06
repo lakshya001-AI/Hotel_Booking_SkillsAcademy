@@ -21,14 +21,21 @@ html, body{
 }
 .navBar{
     width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
 }
 
 .navBarHeading{
-    width: 20%;
-    padding: 20px;
+    /* width: 20%; */
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.loginAndCreateAccountDiv{
+    margin-right: 40px;
 }
 
 .logoImage{
@@ -37,5 +44,5 @@ html, body{
 
 .headingPara{
     font-size: 30px;
-    font-weight: 400;
+    font-weight: 600;
 }

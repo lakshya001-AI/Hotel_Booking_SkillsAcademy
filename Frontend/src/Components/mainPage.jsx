@@ -24,9 +24,24 @@ export default function MainPage() {
         <div className={Style.bookingInfoDivMain}>
           <div className={Style.bookingInfoDiv}>
             <div className={Style.overlay}>
-              <p className={Style.bookingParaIntro}>Your Perfect Stay at the Best Price</p>
-              <p className={Style.bookingParaIntro1}>We bring together the peoples, brands and technology that enables the success of other - welcoming every guest , families, everywhere there journey takes them !!</p>
-
+              <p className={Style.bookingParaIntro}>
+                Your Perfect Stay at the Best Price
+              </p>
+              <p className={Style.bookingParaIntro1}>
+                We bring together the peoples, brands and technology that
+                enables the success of other - welcoming every guest , families,
+                everywhere there journey takes them !!
+              </p>
+              <div className={Style.bookingInfoInputDiv}>
+                <div className={Style.destinationInputFieldDiv}>
+                  <p>Destination</p>
+                  <input
+                    type="text"
+                    placeholder="e.g. - City, landmark, Area"
+                    className={Style.destinationInputField}
+                  />
+                </div>
+              </div>
             </div>
           </div>
         </div>

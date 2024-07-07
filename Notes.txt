@@ -12,3 +12,8 @@ then we have installed the dotenv inorder to excess the .env file data
 const dotenv = require("dotenv)
 dotenv.config()
 by using the process.env.PORT we can get the data of the env file 
+
+
+booking input fields that we have to take -
+
+Destination , check-in, check-out , Guests , search button

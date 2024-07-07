@@ -1,7 +1,47 @@
-import React from "react";
+import React, { useState } from "react";
 import Style from "../App.module.css";
+import {toast} from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
+
+
+
 
 export default function MainPage() {
+
+  const[destination, setDestination] = useState();
+  const[checkIn, setCheckIn] = useState();
+  const[checkOut, setCheckOut] = useState();
+  const[guest, setGuest] = useState();
+
+
+
+
+  let getBookingDetails = () => {
+
+    if (!destination || !checkIn || !checkOut || !guest) {
+      toast.warn('All fields are required', {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: false,
+        progress: undefined,
+        theme: "colored",
+        className: Style.customToast
+      });
+    } else {
+      let dataObj = {
+        destination: destination,
+        checkIn: checkIn,
+        checkOut: checkOut,
+        guest: guest
+      };
+      console.log(dataObj);
+    }
+
+  }
+
   return (
     <>
       <div className={Style.mainDivMainPage}>
@@ -39,6 +79,8 @@ export default function MainPage() {
                     type="text"
                     placeholder="e.g. - City, landmark, Area"
                     className={Style.destinationInputField}
+                    value={destination}
+                    onChange={(e)=>setDestination(e.target.value)}
                   />
                 </div>
                 <div className={Style.checkInInputFieldDiv}>
@@ -46,6 +88,8 @@ export default function MainPage() {
                   <input
                     type="date"
                     className={Style.checkInInputField}
+                    value={checkIn}
+                    onChange={(e)=>{setCheckIn(e.target.value)}}
                   />
                 </div>
                 <div className={Style.checkInInputFieldDiv}>
@@ -53,6 +97,8 @@ export default function MainPage() {
                   <input
                     type="date"
                     className={Style.checkInInputField}
+                    value={checkOut}
+                    onChange={(e)=>{setCheckOut(e.target.value)}}
                   />
                 </div>
                 <div className={Style.guestInputFieldDiv}>
@@ -60,12 +106,14 @@ export default function MainPage() {
                   <input
                     type="text"
                     placeholder="e.g. - 2 Adults"
+                    value={guest}
                     className={Style.destinationInputField}
-                  />
+                    onChange={(e)=>{setGuest(e.target.value)}}
+                    />
                 </div>
               </div>
               <div className={Style.searchBtnDiv}>
-              <button className={Style.searchBtn}>Search</button>
+              <button className={Style.searchBtn} onClick={getBookingDetails}>Search</button>
               </div>
             </div>
           </div>

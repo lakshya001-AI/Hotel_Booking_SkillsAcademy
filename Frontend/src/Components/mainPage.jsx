@@ -41,6 +41,31 @@ export default function MainPage() {
                     className={Style.destinationInputField}
                   />
                 </div>
+                <div className={Style.checkInInputFieldDiv}>
+                  <p>Check-in</p>
+                  <input
+                    type="date"
+                    className={Style.checkInInputField}
+                  />
+                </div>
+                <div className={Style.checkInInputFieldDiv}>
+                  <p>Check-out</p>
+                  <input
+                    type="date"
+                    className={Style.checkInInputField}
+                  />
+                </div>
+                <div className={Style.guestInputFieldDiv}>
+                  <p>Guests</p>
+                  <input
+                    type="text"
+                    placeholder="e.g. - 2 Adults"
+                    className={Style.destinationInputField}
+                  />
+                </div>
+              </div>
+              <div className={Style.searchBtnDiv}>
+              <button className={Style.searchBtn}>Search</button>
               </div>
             </div>
           </div>

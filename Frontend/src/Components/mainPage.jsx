@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Style from "../App.module.css";
-import {toast} from "react-toastify";
+import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 
@@ -19,8 +19,8 @@ export default function MainPage() {
   let getBookingDetails = () => {
 
     if (!destination || !checkIn || !checkOut || !guest) {
-      toast.warn('All fields are required', {
-        position: "top-right",
+      toast.error('All fields are required', {
+        position: "top-center",
         autoClose: 5000,
         hideProgressBar: false,
         closeOnClick: true,
@@ -28,7 +28,6 @@ export default function MainPage() {
         draggable: false,
         progress: undefined,
         theme: "colored",
-        className: Style.customToast
       });
     } else {
       let dataObj = {
@@ -121,6 +120,7 @@ export default function MainPage() {
 
         {/* Hotel List based on the user data selected */}
       </div>
+      <ToastContainer />
     </>
   );
 }

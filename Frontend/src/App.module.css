@@ -253,3 +253,7 @@ html, body{
     cursor: pointer;
     color: white;
 }
+
+.customToast {
+    background-color: rgb(73, 127, 254) !important;
+  }

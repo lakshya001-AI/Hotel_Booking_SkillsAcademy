@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Style from "../App.module.css";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { Link } from "react-router-dom";
 
 
 
@@ -55,8 +56,8 @@ export default function MainPage() {
             <p className={Style.headingPara}>HBooking</p>
           </div>
           <div className={Style.loginAndCreateAccountDiv}>
-            <button className={Style.loginBtn}>login</button>
-            <button className={Style.createAccountBtn}>Create Account</button>
+            <Link className={Style.loginBtn} to="/loginPage">login</Link>
+            <Link className={Style.createAccountBtn} to="/createAccount">Create Account</Link>
           </div>
         </div>
         {/* Booking Data section and Search Button to search for the Hotels */}

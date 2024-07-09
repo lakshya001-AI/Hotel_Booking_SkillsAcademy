@@ -28,7 +28,6 @@ function LoginPage() {
               </div>
             </div>
             <div className={Style.loginPageDiv2}>
-              <p className={Style.signInPara}>Sign In</p>
               <div className={Style.emailInputDiv}>
                 <p>Email</p>
                 <input type="email" className={Style.emailInputField} placeholder="hbooking@gmail.com" value={email} onChange={(e)=>setEmail(e.target.value)}/>

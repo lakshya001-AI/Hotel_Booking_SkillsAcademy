@@ -3,11 +3,13 @@ import Style from "../App.module.css";
 import { Link } from "react-router-dom";
 
 function CreateAccount() {
+  const [name, setName] = useState();
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
 
   function getData() {
     let obj = {
+      name: name,
       email: email,
       password: password,
     };
@@ -36,8 +38,8 @@ function CreateAccount() {
                   type="text"
                   className={Style.emailInputField}
                   placeholder="HBooking"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
                 />
               </div>
               <div className={Style.passwordInputDiv}>
@@ -46,8 +48,8 @@ function CreateAccount() {
                   type="email"
                   className={Style.emailInputField}
                   placeholder="HBooking@gmail.com"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                 />
               </div>
               <div className={Style.passwordInputDiv}>

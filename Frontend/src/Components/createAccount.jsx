@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import Style from "../App.module.css";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { Link } from "react-router-dom";
 
 function CreateAccount() {
@@ -8,13 +10,36 @@ function CreateAccount() {
   const [password, setPassword] = useState();
 
   function getData() {
-    let obj = {
-      name: name,
-      email: email,
-      password: password,
-    };
 
-    console.log(obj);
+    if(name && email && password){
+
+
+
+      
+      // toast.success('ok you are good to go', {
+      //   position: "top-center",
+      //   autoClose: 5000,
+      //   hideProgressBar: false,
+      //   closeOnClick: true,
+      //   pauseOnHover: true,
+      //   draggable: false,
+      //   progress: undefined,
+      //   theme: "colored",
+      // });
+
+    }else{
+      toast.error('All fields are required', {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: false,
+        progress: undefined,
+        theme: "colored",
+      });
+    }
+
   }
   
   return (
@@ -73,6 +98,7 @@ function CreateAccount() {
           </div>
         </div>
       </div>
+      <ToastContainer/>
     </>
   );
 }

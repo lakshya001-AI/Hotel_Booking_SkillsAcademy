@@ -1,21 +1,58 @@
 import React, { useState } from "react";
 import Style from "../App.module.css";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 function CreateAccount() {
   const [name, setName] = useState();
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
 
-  function getData() {
+  async function getData() {
+    if (name && email && password) {
+      try {
+        await axios
+          .post("http://localhost:5000/createUser", { name, email, password })
+          .then((res) => {
+            toast.success("Account Created Successfully , Please login with email and Password", {
+              position: "top-center",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: false,
+              progress: undefined,
+              theme: "colored",
+            });
+          })
+          .catch((error) => {
+            toast.error("Error in saving the Data", {
+              position: "top-center",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: false,
+              progress: undefined,
+              theme: "colored",
+            });
 
-    if(name && email && password){
+          });
+      } catch (error) {
+        toast.error("An internal error occurred", {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: false,
+          progress: undefined,
+          theme: "colored",
+        });
+      }
 
-
-
-      
       // toast.success('ok you are good to go', {
       //   position: "top-center",
       //   autoClose: 5000,
@@ -26,9 +63,8 @@ function CreateAccount() {
       //   progress: undefined,
       //   theme: "colored",
       // });
-
-    }else{
-      toast.error('All fields are required', {
+    } else {
+      toast.error("All fields are required", {
         position: "top-center",
         autoClose: 5000,
         hideProgressBar: false,
@@ -39,9 +75,8 @@ function CreateAccount() {
         theme: "colored",
       });
     }
-
   }
-  
+
   return (
     <>
       <div className={Style.mainDivMainPage}>
@@ -98,7 +133,7 @@ function CreateAccount() {
           </div>
         </div>
       </div>
-      <ToastContainer/>
+      <ToastContainer />
     </>
   );
 }

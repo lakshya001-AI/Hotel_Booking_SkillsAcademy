@@ -395,4 +395,51 @@ html, body{
     color: white;
 }
 
+.backToSignINBtn{
+    padding: 10px;
+    width: 9vmax;
+    font-size: 14px;
+    border-radius: 25px;
+    /* background-color:  #0074ff; */
+    background: linear-gradient(to right, #0074ff, #00c6ff);
+    border: 0;
+    cursor: pointer;
+    color: white;
+    text-decoration: none;
+}
 
+.backToSignINBtn:hover{
+    padding: 10px;
+    width: 9vmax;
+    font-size: 14px;
+    border-radius: 25px;
+    /* background-color:  #0074ff; */
+    background: linear-gradient(to left, #0074ff, #00c6ff);
+    border: 0;
+    cursor: pointer;
+    color: white;
+    text-decoration: none;
+}
+
+.emailInputDivCreateAccount{
+    width: 100%;
+    margin-top: 20px;
+}
+
+
+.emailInputDivCreateAccount p{
+    font-size: 19px;
+}
+
+.createAccountBtn1{
+    padding: 10px;
+    width: 10vmax;
+    font-size: 16px;
+    border-radius: 25px;
+    /* background-color:  #0074ff; */
+    background: linear-gradient(to right, #0074ff, #00c6ff);
+    border: 0;
+    cursor: pointer;
+    color: white;
+    text-decoration: none;
+}

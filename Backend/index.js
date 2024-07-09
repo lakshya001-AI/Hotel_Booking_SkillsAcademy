@@ -15,9 +15,9 @@ app.post("/createUser", async (req, res) => {
   try {
     const { name, email, password } = req.body;
     const hashPassword = await bcrypt.hash(password, 10);
-    const existingUser = await userModel.findOne({email:email});
-    if(existingUser){
-        return res.status(409).send({message:"User Already Exits"});
+    const existingUser = await userModel.findOne({ email: email });
+    if (existingUser) {
+      return res.status(409).send({ message: "User Already Exits" });
     }
     const createdUser = await userModel.create({
       name: name,
@@ -28,6 +28,17 @@ app.post("/createUser", async (req, res) => {
     return res.status(200).send({ message: "User Created Successfully" });
   } catch (error) {
     return res.status(500).send({ message: "Error:", error });
+  }
+});
+
+app.post("/loginUser", async (req, res) => {
+  const { email, password } = req.body;
+  const user = await userModel.findOne({ email: email });
+  const existingUser = await bcrypt.compare(password, user.password);
+  if (existingUser) {
+    return res.status(200).send({ message: "login successfully" });
+  } else {
+    return res.status(400).send({message:"no password match"});
   }
 });
 

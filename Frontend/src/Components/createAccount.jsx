@@ -16,6 +16,7 @@ function CreateAccount() {
 
     console.log(obj);
   }
+  
   return (
     <>
       <div className={Style.mainDivMainPage}>

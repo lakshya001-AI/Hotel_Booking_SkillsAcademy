@@ -15,15 +15,28 @@ app.post("/createUser", async (req, res) => {
   try {
     const { name, email, password } = req.body;
     const hashPassword = await bcrypt.hash(password, 10);
-    const user = await userModel.create({
+    const existingUser = await userModel.findOne({email:email});
+    if(existingUser){
+        return res.status(409).send({message:"User Already Exits"});
+    }
+    const createdUser = await userModel.create({
       name: name,
       email: email,
       password: hashPassword,
     });
-    console.log(user);
+    console.log(createdUser);
     return res.status(200).send({ message: "User Created Successfully" });
   } catch (error) {
     return res.status(500).send({ message: "Error:", error });
+  }
+});
+
+app.get("/getUsers", async (req, res) => {
+  try {
+    const users = await userModel.find();
+    console.log(users);
+  } catch (error) {
+    console.log(error);
   }
 });
 

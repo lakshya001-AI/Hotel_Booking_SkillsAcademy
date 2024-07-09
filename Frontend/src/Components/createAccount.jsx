@@ -12,36 +12,9 @@ function CreateAccount() {
 
   async function getData() {
     if (name && email && password) {
-      try {
-        await axios
-          .post("http://localhost:5000/createUser", { name, email, password })
-          .then((res) => {
-            toast.success("Account Created Successfully , Please login with email and Password", {
-              position: "top-center",
-              autoClose: 5000,
-              hideProgressBar: false,
-              closeOnClick: true,
-              pauseOnHover: true,
-              draggable: false,
-              progress: undefined,
-              theme: "colored",
-            });
-          })
-          .catch((error) => {
-            toast.error("Error in saving the Data", {
-              position: "top-center",
-              autoClose: 5000,
-              hideProgressBar: false,
-              closeOnClick: true,
-              pauseOnHover: true,
-              draggable: false,
-              progress: undefined,
-              theme: "colored",
-            });
-
-          });
-      } catch (error) {
-        toast.error("An internal error occurred", {
+      await axios.post("http://localhost:5000/createUser",{name:name,email:email,password:password})
+      .then((res)=>{
+        toast.success("Account Created Successfully! Please login with email and password", {
           position: "top-center",
           autoClose: 5000,
           hideProgressBar: false,
@@ -51,20 +24,33 @@ function CreateAccount() {
           progress: undefined,
           theme: "colored",
         });
-      }
-
-      // toast.success('ok you are good to go', {
-      //   position: "top-center",
-      //   autoClose: 5000,
-      //   hideProgressBar: false,
-      //   closeOnClick: true,
-      //   pauseOnHover: true,
-      //   draggable: false,
-      //   progress: undefined,
-      //   theme: "colored",
-      // });
-    } else {
-      toast.error("All fields are required", {
+      }).catch((error)=>{
+        if (error.response && error.response.status === 409) {
+          toast.error("User already exists", {
+            position: "top-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: false,
+            progress: undefined,
+            theme: "colored",
+          });
+        } else {
+          toast.error("Error in saving the Data", {
+            position: "top-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: false,
+            progress: undefined,
+            theme: "colored",
+          });
+        }
+      });
+    }else{
+      toast.warn("All fields are required", {
         position: "top-center",
         autoClose: 5000,
         hideProgressBar: false,
@@ -75,7 +61,7 @@ function CreateAccount() {
         theme: "colored",
       });
     }
-  }
+}
 
   return (
     <>

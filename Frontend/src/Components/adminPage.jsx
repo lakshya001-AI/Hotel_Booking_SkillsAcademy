@@ -1,6 +1,7 @@
 import React from 'react'
 import Style from "../App.module.css"
 import { Link } from 'react-router-dom';
+import PhotoUpload from './photoupload';
 
 function AdminPage() {
   return <>
@@ -33,7 +34,12 @@ function AdminPage() {
         </div>
 
         <div className={Style.hotelInfoDiv2}>
-          <textarea name="" ></textarea>
+
+          <textarea name="" className={Style.hotelDescription} placeholder='Hotel Description'></textarea>
+
+          <div className={Style.hotelImageDiv}>
+          <PhotoUpload/>
+          </div>
 
         </div>
 

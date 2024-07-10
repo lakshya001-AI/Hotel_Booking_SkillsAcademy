@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Style from "../App.module.css";
 
 const PhotoUpload = () => {
   const [selectedFile, setSelectedFile] = useState(null);
@@ -30,15 +31,15 @@ const PhotoUpload = () => {
 
   return (
     <div>
-      <h2>Upload a Photo</h2>
-      <form onSubmit={handleSubmit}>
+      <h2 className={Style.uploadFileHeading}>Upload a Photo</h2>
+      <form onSubmit={handleSubmit} className={Style.imageForm}>
         <input type="file" accept="image/*" onChange={handleFileChange} />
-        {preview && (
+        {/* {preview && (
           <div>
             <h3>Preview:</h3>
             <img src={preview} alt="Preview" style={{ width: '300px', height: '200px' }} />
           </div>
-        )}
+        )} */}
         <button type="submit">Submit</button>
       </form>
     </div>

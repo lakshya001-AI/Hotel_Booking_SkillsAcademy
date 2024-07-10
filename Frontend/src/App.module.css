@@ -485,7 +485,8 @@ html, body{
 }
 
 .addHotelBtn:hover{
-    background-color: #0074ff;
+    background: linear-gradient(to left, #0074ff, #00c6ff);
+    border: 0;
     color: white;
 }
 
@@ -503,7 +504,8 @@ html, body{
 }
 
 .usersBtn:hover{
-    background-color: #0074ff;
+    background: linear-gradient(to left, #0074ff, #00c6ff);
+    border: 0;
     color: white;
 }
 
@@ -590,7 +592,7 @@ html, body{
 
 .hotelDescription{
     width: 41vw;
-    height: 140px;
+    height: 200px;
     resize: none;
     padding: 13px 20px;
     border: solid 1px black;
@@ -603,12 +605,56 @@ html, body{
 
 .hotelImageDiv{
     width: 39vw;
-    height: 140px;
+    height: 200px;
     padding: 13px 20px;
     border: solid 1px black;
     outline: none;
     border-radius: 30px;
     font-size: 15px;
     font-family: "Poppins", sans-serif;
+}
+
+.uploadFileHeading{
+    font-size: 17px;
+    font-weight: 300;
+    color: rgb(55, 55, 55);
+}
+
+.imageForm{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.hotelInfoSubmitBtn{
+    padding: 15px;
+    width: 12vmax;
+    font-size: 16px;
+    border-radius: 30px;
+    /* background-color:  #0074ff; */
+    background: linear-gradient(to right, #0074ff, #00c6ff);
+    border: 0;
+    cursor: pointer;
+    color: white;
+    text-decoration: none;
+}
+
+.hotelInfoSubmitBtn:hover{
+    padding: 15px;
+    width: 12vmax;
+    font-size: 16px;
+    border-radius: 30px;
+    /* background-color:  #0074ff; */
+    background: linear-gradient(to left, #0074ff, #00c6ff);
+    border: 0;
+    cursor: pointer;
+    color: white;
+    text-decoration: none;
+}
+
+.imageInputField{
+    margin-top: 40px;
 }
 

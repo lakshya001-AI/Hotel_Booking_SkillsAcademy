@@ -443,3 +443,23 @@ html, body{
     color: white;
     text-decoration: none;
 }
+
+/* ----------------------------- ADMIN Page ----------------------------- */
+
+.adminMainDiv{
+    width: 100vw;
+    height: 100vh;
+    background-color: #FFFFFF;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+}
+
+.adminPara1{
+    margin-top: 20px;
+    font-size: 41px;
+    padding-bottom: 5px;
+    border-bottom: solid 3px #0074ff;
+    border-radius: 10px;
+}

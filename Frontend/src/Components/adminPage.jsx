@@ -5,7 +5,12 @@ function AdminPage() {
   return <>
 
   <div className={Style.mainDivMainPage}>
-    
+    <div className={Style.adminMainDiv}>
+      <h3 className={Style.adminPara1}>Welcome to Admin Page</h3>
+      
+
+    </div>
+
   </div>
 
 
@@ -13,4 +18,4 @@ function AdminPage() {
   </>
 }
 
-export default AdminPage
+export default AdminPage;

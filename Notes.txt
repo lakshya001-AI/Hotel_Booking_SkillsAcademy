@@ -25,4 +25,4 @@ on the admin Page the admin can list newhotel , delete the hotels and also delet
 flow to make this -
 
 1. Create the form to save the hotel data in the database.
-   Hotel Data we have to take - hotel name , location , city , state, price per room , hotel photo
+   Hotel Data we have to take - hotel name , location , city , state, price per room , hotel photo , Hotel description 

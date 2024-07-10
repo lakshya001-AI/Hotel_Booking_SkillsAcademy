@@ -512,3 +512,76 @@ html, body{
     align-items: center;
     flex-direction: row;
 }
+
+.hotelAddFormDiv{
+    width: 100vw;
+    height: 100vh;
+}
+
+.hotelInfoDiv1{
+    width: 100vw;
+    margin-top: 5vmax;
+    padding: 0px 10px;
+}
+
+.hotelName{
+    width: 40vw;
+    padding: 13px 20px;
+    margin-right: 10px;
+    border: solid 1px black;
+    outline: none;
+    border-radius: 30px;
+    font-size: 15px;
+    font-family: "Poppins", sans-serif;
+}
+
+.hotelCity{
+    width: 20vw;
+    padding: 13px 20px;
+    margin-right: 10px;
+    border: solid 1px black;
+    outline: none;
+    border-radius: 30px;
+    font-size: 15px;
+    font-family: "Poppins", sans-serif;
+}
+
+.hotelState{
+    width: 20vw;
+    padding: 13px 20px;
+    margin-right: 10px;
+    border: solid 1px black;
+    outline: none;
+    border-radius: 30px;
+    font-size: 15px;
+    font-family: "Poppins", sans-serif;
+}
+
+.hotelInfoDiv2{
+    width: 100vw;
+    margin-top: 2vmax;
+    padding: 0px 10px;
+}
+
+.hotelAddress{
+    width: 40vw;
+    padding: 13px 20px;
+    margin-right: 10px;
+    border: solid 1px black;
+    outline: none;
+    border-radius: 30px;
+    font-size: 15px;
+    font-family: "Poppins", sans-serif;
+}
+
+.hotelRoomPrice{
+    width: 40vw;
+    padding: 13px 20px;
+    margin-right: 10px;
+    border: solid 1px black;
+    outline: none;
+    border-radius: 30px;
+    font-size: 15px;
+    font-family: "Poppins", sans-serif;
+}
+

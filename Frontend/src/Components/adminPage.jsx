@@ -15,7 +15,24 @@ function AdminPage() {
         <Link className={Style.usersBtn} to="/adminUsersPage">Users</Link>
       </div>
 
+      </div>
 
+      <div className={Style.hotelAddFormDiv}>
+
+        <div className={Style.hotelInfoDiv1}>
+          <input type="text" className={Style.hotelName} placeholder='Hotel Name'/>
+          <input type="text" className={Style.hotelCity} placeholder='City'/>
+          <input type="text" className={Style.hotelState} placeholder='State'/>
+
+        </div>
+
+        <div className={Style.hotelInfoDiv2}>
+          <input type="text" className={Style.hotelAddress} placeholder='Address'/>
+          <input type="text" className={Style.hotelRoomPrice} placeholder='Price'/>
+
+        </div>
+
+        
       </div>
 
     </div>

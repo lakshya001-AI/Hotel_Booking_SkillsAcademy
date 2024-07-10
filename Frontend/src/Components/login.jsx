@@ -2,12 +2,14 @@ import React, { useState } from "react";
 import Style from "../App.module.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate} from "react-router-dom";
 import axios from "axios";
 ``
 function LoginPage() {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
+
+  const navigate = useNavigate();
 
   async function loginUser() {
     if (email && password) {
@@ -16,7 +18,7 @@ function LoginPage() {
 
         if(res.status === 201){
           toast.success("Admin login Successful", {
-            position: "top-center",
+            position: "top-right",
             autoClose: 5000,
             hideProgressBar: false,
             closeOnClick: true,
@@ -25,11 +27,15 @@ function LoginPage() {
             progress: undefined,
             theme: "colored",
           });
+
+          setTimeout(()=>{
+            navigate("/adminPage");
+          },5000);
 
 
         }else{
           toast.success("login Successful", {
-            position: "top-center",
+            position: "top-right",
             autoClose: 5000,
             hideProgressBar: false,
             closeOnClick: true,
@@ -38,12 +44,16 @@ function LoginPage() {
             progress: undefined,
             theme: "colored",
           });
+
+          setTimeout(()=>{
+            navigate("/mainPage");
+          },5000);
 
         }
       }).catch((error)=>{
         if(error.response && error.response.status === 400){
           toast.error("Please Check Your Email and Password", {
-            position: "top-center",
+            position: "top-right",
             autoClose: 5000,
             hideProgressBar: false,
             closeOnClick: true,
@@ -55,7 +65,7 @@ function LoginPage() {
 
         }else{
           toast.warn("An internal error occurred", {
-            position: "top-center",
+            position: "top-right",
             autoClose: 5000,
             hideProgressBar: false,
             closeOnClick: true,
@@ -69,7 +79,7 @@ function LoginPage() {
       });
     }else {
       toast.warn("All fields are required", {
-        position: "top-center",
+        position: "top-right",
         autoClose: 5000,
         hideProgressBar: false,
         closeOnClick: true,

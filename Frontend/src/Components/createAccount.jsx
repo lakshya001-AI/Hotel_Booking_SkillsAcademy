@@ -18,7 +18,7 @@ function CreateAccount() {
       await axios.post("http://localhost:5000/createUser",{name:name,email:email,password:password})
       .then((res)=>{
         toast.success("Account Created Successfully! Please login with email and password", {
-          position: "top-center",
+          position: "top-right",
           autoClose: 5000,
           hideProgressBar: false,
           closeOnClick: true,
@@ -27,10 +27,14 @@ function CreateAccount() {
           progress: undefined,
           theme: "colored",
         });
+
+        setTimeout(()=>{
+          navigate("/");
+        },5000);      
       }).catch((error)=>{
         if (error.response && error.response.status === 409) {
           toast.error("User already exists", {
-            position: "top-center",
+            position: "top-right",
             autoClose: 5000,
             hideProgressBar: false,
             closeOnClick: true,
@@ -41,7 +45,7 @@ function CreateAccount() {
           });
         } else {
           toast.error("Error in saving the Data", {
-            position: "top-center",
+            position: "top-right",
             autoClose: 5000,
             hideProgressBar: false,
             closeOnClick: true,
@@ -54,7 +58,7 @@ function CreateAccount() {
       });
     }else{
       toast.warn("All fields are required", {
-        position: "top-center",
+        position: "top-right",
         autoClose: 5000,
         hideProgressBar: false,
         closeOnClick: true,

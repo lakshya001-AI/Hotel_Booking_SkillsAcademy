@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import MainPage from "./Components/mainPage";
 import LoginPage from "./Components/login";
 import CreateAccount from "./Components/createAccount";
+import AdminPage from "./Components/adminPage";
 
 export default function App() {
   return (
@@ -13,6 +14,7 @@ export default function App() {
           <Route path="/mainPage" element={<MainPage/>}/>
           <Route path="/" element={<LoginPage/>}/>
           <Route path="/createAccount" element={<CreateAccount/>}/>
+          <Route path="/adminPage" element={<AdminPage/>}/>
         </Routes>
       </BrowserRouter>
     </>

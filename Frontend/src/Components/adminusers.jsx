@@ -2,7 +2,7 @@ import React from 'react'
 import Style from "../App.module.css"
 import { Link } from 'react-router-dom';
 
-function AdminPage() {
+function AdminUsersPage() {
   return <>
 
   <div className={Style.mainDivMainPage}>
@@ -11,8 +11,8 @@ function AdminPage() {
       <h3 className={Style.adminPara1}>Admin Panel</h3>
 
       <div className={Style.adminNavButtonDiv}>
-        <Link className={Style.addHotelBtn} to="/adminPage">Add Hotel</Link>
-        <Link className={Style.usersBtn} to="/adminUsersPage">Users</Link>
+      <Link className={Style.addHotelBtn} to="/adminPage">Add Hotel</Link>
+      <Link className={Style.usersBtn} to="/adminUsersPage">Users</Link>
       </div>
 
 
@@ -27,4 +27,4 @@ function AdminPage() {
   </>
 }
 
-export default AdminPage;
+export default AdminUsersPage;

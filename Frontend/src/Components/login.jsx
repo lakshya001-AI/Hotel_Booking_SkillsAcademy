@@ -13,20 +13,34 @@ function LoginPage() {
     if (email && password) {
       await axios.post("http://localhost:5000/loginUser",{email:email,password:password})
       .then((res)=>{
-        toast.success("login Successful", {
-          position: "top-center",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: false,
-          progress: undefined,
-          theme: "colored",
-        });
+
+        if(res.status === 201){
+          toast.success("Admin login Successful", {
+            position: "top-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: false,
+            progress: undefined,
+            theme: "colored",
+          });
 
 
-      })
-      .catch((error)=>{
+        }else{
+          toast.success("login Successful", {
+            position: "top-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: false,
+            progress: undefined,
+            theme: "colored",
+          });
+
+        }
+      }).catch((error)=>{
         if(error.response && error.response.status === 400){
           toast.error("Please Check Your Email and Password", {
             position: "top-center",

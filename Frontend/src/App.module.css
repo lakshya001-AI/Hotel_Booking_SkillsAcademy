@@ -564,7 +564,7 @@ html, body{
 }
 
 .hotelAddress{
-    width: 40vw;
+    width: 42vw;
     padding: 13px 20px;
     margin-right: 10px;
     border: solid 1px black;
@@ -575,9 +575,8 @@ html, body{
 }
 
 .hotelRoomPrice{
-    width: 40vw;
+    width: 39vw;
     padding: 13px 20px;
-    margin-right: 10px;
     border: solid 1px black;
     outline: none;
     border-radius: 30px;

@@ -32,6 +32,11 @@ function AdminPage() {
 
         </div>
 
+        <div className={Style.hotelInfoDiv2}>
+          <textarea name="" ></textarea>
+
+        </div>
+
         
       </div>
 

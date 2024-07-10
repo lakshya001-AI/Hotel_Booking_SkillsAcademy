@@ -5,6 +5,7 @@ const cors = require("cors");
 const connectMongoDB = require("./MongoDB/connect");
 const bcrypt = require("bcrypt");
 const userModel = require("./MongoDB/model");
+const hotelModel = require("./MongoDB/hotelModel");
 dotenv.config();
 connectMongoDB();
 
@@ -52,6 +53,8 @@ app.get("/getUsers", async (req, res) => {
     console.log(error);
   }
 });
+
+app.post("/", (req, res) => {});
 
 const PORT = process.env.PORT;
 app.listen(PORT, () => {

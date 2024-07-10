@@ -17,6 +17,7 @@ function LoginPage() {
       .then((res)=>{
 
         if(res.status === 201){
+
           toast.success("Admin login Successful", {
             position: "top-right",
             autoClose: 5000,
@@ -27,6 +28,8 @@ function LoginPage() {
             progress: undefined,
             theme: "colored",
           });
+        
+          
 
           setTimeout(()=>{
             navigate("/adminPage");
@@ -34,7 +37,7 @@ function LoginPage() {
 
 
         }else{
-          toast.success("login Successful", {
+         toast.success("login Successful", {
             position: "top-right",
             autoClose: 5000,
             hideProgressBar: false,
@@ -43,7 +46,7 @@ function LoginPage() {
             draggable: false,
             progress: undefined,
             theme: "colored",
-          });
+          }); 
 
           setTimeout(()=>{
             navigate("/mainPage");

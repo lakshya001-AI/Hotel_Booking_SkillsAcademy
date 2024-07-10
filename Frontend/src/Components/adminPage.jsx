@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import Style from "../App.module.css";
 import { Link } from "react-router-dom";
 import PhotoUpload from "./photoupload";
+import {toast,ToastContainer} from "react-toastify";
+import axios from "axios";
 
 
 function AdminPage() {
@@ -28,7 +30,33 @@ function AdminPage() {
     }
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async () => {
+
+    if(hotelName && hotelCity && hotelState && hotelAddress && hotelPrice && hotelDescription && selectedFile){
+      // From here we are going to send the data to the backend and then save the data in the Database
+
+      await axios.post("http://localhost:5000/setHotelData", {hotelName,hotelCity,hotelState,hotelAddress,hotelPrice,hotelDescription,selectedFile})
+      .then((res))
+      .catch((error));
+
+
+
+      
+
+    }else{
+
+      toast.error("All fields are necessary", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: false,
+        progress: undefined,
+        theme: "colored",
+      });
+
+    }
 
   };
 
@@ -37,7 +65,7 @@ function AdminPage() {
       <div className={Style.mainDivMainPage}>
         <div className={Style.adminMainDiv}>
           <div className={Style.adminNavbar}>
-            <h3 className={Style.adminPara1}>Admin Panel</h3>
+            <h3 className={Style.adminPara1}>Hotel Admin</h3>
 
             <div className={Style.adminNavButtonDiv}>
               <Link className={Style.addHotelBtn} to="/adminPage">
@@ -47,6 +75,10 @@ function AdminPage() {
                 Users
               </Link>
             </div>
+          </div>
+
+          <div>
+            <h4 className={Style.hotelDetailsHeading}>Hotel Details</h4>
           </div>
 
           <div className={Style.hotelAddFormDiv}>
@@ -83,7 +115,7 @@ function AdminPage() {
                 onChange={(e)=>setHotelAddress(e.target.value)}
               />
               <input
-                type="text"
+                type="number"
                 className={Style.hotelRoomPrice}
                 placeholder="Price"
                 value={hotelPrice}
@@ -115,11 +147,12 @@ function AdminPage() {
             </div>
 
             <div className={Style.hotelInfoDiv2}>
-              <button className={Style.hotelInfoSubmitBtn}>Submit</button>
+              <button className={Style.hotelInfoSubmitBtn} onClick={handleSubmit}>Submit</button>
             </div>
           </div>
         </div>
       </div>
+      <ToastContainer/>
     </>
   );
 }

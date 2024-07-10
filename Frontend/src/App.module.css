@@ -457,9 +457,14 @@ html, body{
 }
 
 .adminPara1{
-    margin-top: 20px;
-    font-size: 41px;
-    padding-bottom: 5px;
-    border-bottom: solid 3px #0074ff;
+    font-size: 30px;
     border-radius: 10px;
+}
+
+.adminNavbar{
+    width: 100%;
+    padding: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }

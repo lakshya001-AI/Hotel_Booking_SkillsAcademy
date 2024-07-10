@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Style from "../App.module.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { Link , Navigate} from "react-router-dom";
+import { Link , Navigate , useNavigate} from "react-router-dom";
 import axios from "axios";
 
 function CreateAccount() {
@@ -10,7 +10,8 @@ function CreateAccount() {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
 
-  const navigate = Navigate();
+
+  const navigate = useNavigate();
 
   async function getData() {
     if (name && email && password) {
@@ -26,7 +27,6 @@ function CreateAccount() {
           progress: undefined,
           theme: "colored",
         });
-        navigate("/");
       }).catch((error)=>{
         if (error.response && error.response.status === 409) {
           toast.error("User already exists", {

@@ -54,7 +54,39 @@ app.get("/getUsers", async (req, res) => {
   }
 });
 
-app.post("/", (req, res) => {});
+app.post("/setHotelData", async (req, res) => {
+  try {
+    const {
+      hotelName,
+      hotelCity,
+      hotelState,
+      hotelAddress,
+      hotelPrice,
+      hotelDescription,
+      selectedFile,
+    } = req.body;
+
+    const existingHotel = await hotelModel.findOne({ hotelName: hotelName });
+
+    if (existingHotel) {
+      return res.status(401).send({ message: "Hotel Already Registered" });
+    } else {
+      const hotel = await hotelModel.create({
+        hotelName: hotelName,
+        hotelCity: hotelCity,
+        hotelState: hotelState,
+        hotelAddress: hotelAddress,
+        hotelPrice: hotelPrice,
+        hotelDescription: hotelDescription,
+        selectedFile: selectedFile,
+      });
+      console.log(hotel);
+      res.status(200).send({message:"Hotel added to the database"});
+    }
+  } catch (error) {
+    return res.status(501).send({message:"Error" + error});
+  }
+});
 
 const PORT = process.env.PORT;
 app.listen(PORT, () => {

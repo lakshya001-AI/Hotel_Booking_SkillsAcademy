@@ -36,8 +36,45 @@ function AdminPage() {
       // From here we are going to send the data to the backend and then save the data in the Database
 
       await axios.post("http://localhost:5000/setHotelData", {hotelName,hotelCity,hotelState,hotelAddress,hotelPrice,hotelDescription,selectedFile})
-      .then((res))
-      .catch((error));
+      .then((res)=>{
+        toast.success("Hotel added to the database", {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: false,
+          progress: undefined,
+          theme: "colored",
+        });
+
+      })
+      .catch((error)=>{
+        if(error.response && error.response.status === 401){
+          toast.error("Hotel Already Registered", {
+            position: "top-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: false,
+            progress: undefined,
+            theme: "colored",
+          });
+
+        }else{
+          toast.error("Error occurred will saving data", {
+            position: "top-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: false,
+            progress: undefined,
+            theme: "colored",
+          });
+        }
+      });
 
 
 

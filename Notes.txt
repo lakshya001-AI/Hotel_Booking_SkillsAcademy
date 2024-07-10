@@ -17,3 +17,12 @@ by using the process.env.PORT we can get the data of the env file
 booking input fields that we have to take -
 
 Destination , check-in, check-out , Guests , search button
+
+--------------------------------------- ADMIN PAGE -----------------------------------------
+
+on the admin Page the admin can list newhotel , delete the hotels and also delete the users 
+
+flow to make this -
+
+1. Create the form to save the hotel data in the database.
+   Hotel Data we have to take - hotel name , location , city , state, price per room , hotel photo 

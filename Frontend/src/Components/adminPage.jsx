@@ -20,14 +20,6 @@ function AdminPage() {
   const handleFileChange = (event) => {
     const file = event.target.files[0];
     setSelectedFile(file);
-
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setPreview(reader.result);
-      };
-      reader.readAsDataURL(file);
-    }
   };
 
   const handleSubmit = async () => {
@@ -35,8 +27,20 @@ function AdminPage() {
     if(hotelName && hotelCity && hotelState && hotelAddress && hotelPrice && hotelDescription && selectedFile){
       // From here we are going to send the data to the backend and then save the data in the Database
 
-      await axios.post("http://localhost:5000/setHotelData", {hotelName,hotelCity,hotelState,hotelAddress,hotelPrice,hotelDescription,selectedFile})
-      .then((res)=>{
+      const formData = new FormData();
+      formData.append("hotelName", hotelName);
+      formData.append("hotelCity", hotelCity);
+      formData.append("hotelState", hotelState);
+      formData.append("hotelAddress", hotelAddress);
+      formData.append("hotelPrice", hotelPrice);
+      formData.append("hotelDescription", hotelDescription);
+      formData.append("selectedFile", selectedFile);
+
+
+      await axios.post("http://localhost:5000/setHotelData", formData ,{
+        headers: {
+          "Content-Type": "multipart/form-data",
+        }}).then((res)=>{
         toast.success("Hotel added to the database", {
           position: "top-center",
           autoClose: 5000,
@@ -47,9 +51,7 @@ function AdminPage() {
           progress: undefined,
           theme: "colored",
         });
-
-      })
-      .catch((error)=>{
+      }).catch((error)=>{
         if(error.response && error.response.status === 401){
           toast.error("Hotel Already Registered", {
             position: "top-center",
@@ -173,6 +175,7 @@ function AdminPage() {
                 {/* <PhotoUpload/> */}
                 <h2 className={Style.uploadFileHeading}>Upload a Photo</h2>
                 <div className={Style.imageForm}>
+                {/* Here we are taking the image from the user  */}
                   <input
                     type="file"
                     accept="image/*"
@@ -184,6 +187,7 @@ function AdminPage() {
             </div>
 
             <div className={Style.hotelInfoDiv2}>
+              {/* Here we have called the function to send the image to the backend  */}
               <button className={Style.hotelInfoSubmitBtn} onClick={handleSubmit}>Submit</button>
             </div>
           </div>

@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import Style from "../App.module.css";
 import { Link } from "react-router-dom";
-import PhotoUpload from "./photoupload";
 import {toast,ToastContainer} from "react-toastify";
 import axios from "axios";
 

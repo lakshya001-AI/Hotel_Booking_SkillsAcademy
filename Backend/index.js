@@ -45,14 +45,14 @@ app.post("/loginUser", async (req, res) => {
   }
 });
 
-app.get("/getUsers", async (req, res) => {
-  try {
-    const users = await userModel.find();
-    console.log(users);
-  } catch (error) {
-    console.log(error);
-  }
-});
+// app.get("/getUsers", async (req, res) => {
+//   try {
+//     const users = await userModel.find();
+//     console.log(users);
+//   } catch (error) {
+//     console.log(error);
+//   }
+// });
 
 app.post("/setHotelData", async (req, res) => {
   try {
@@ -81,10 +81,21 @@ app.post("/setHotelData", async (req, res) => {
         imgLink: imgLink,
       });
       console.log(hotel);
-      res.status(200).send({message:"Hotel added to the database"});
+      res.status(200).send({ message: "Hotel added to the database" });
     }
   } catch (error) {
-    return res.status(501).send({message:"Error" + error});
+    return res.status(501).send({ message: "Error" + error });
+  }
+});
+
+// This route is used to get the data of the users
+
+app.get("/getUsersDetails", async (req, res) => {
+  try {
+    const users = await userModel.find();
+    res.status(200).send(users);
+  } catch (error) {
+    return res.status(500).send({ message: "Error:" + error });
   }
 });
 

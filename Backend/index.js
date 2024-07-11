@@ -6,41 +6,11 @@ const connectMongoDB = require("./MongoDB/connect");
 const bcrypt = require("bcrypt");
 const userModel = require("./MongoDB/model");
 const hotelModel = require("./MongoDB/hotelModel");
-const methodOverride = require("method-override");
-const multer = require("multer");
-const mongoose = require("mongoose");
-const {GridFsStorage} = require("multer-gridfs-storage");
-const Grid = require("gridfs-stream");
 dotenv.config();
 connectMongoDB();
 
 app.use(express.json());
 app.use(cors());
-app.use(methodOverride('_method'));
-
-// Initialize GridFS
-let gfs;
-const conn = mongoose.connection;
-conn.once('open', () => {
-  gfs = Grid(conn.db, mongoose.mongo);
-  gfs.collection('uploads');
-});
-
-
-const storage = new GridFsStorage({
-  url:process.env.MONGO_URI,
-  options: { useNewUrlParser: true, useUnifiedTopology: true },
-  file:(req, file)=>{
-    return {
-      filename: `${Date.now()}-${file.originalname}`,
-      bucketName: 'uploads'
-    };
-  }
-});
-
-const upload = multer({ storage });
-
-
 
 app.post("/createUser", async (req, res) => {
   try {
@@ -84,8 +54,7 @@ app.get("/getUsers", async (req, res) => {
   }
 });
 
-// This route is used to set the data into the database 
-app.post("/setHotelData",upload.single("selectedFile"),async (req, res) => {
+app.post("/setHotelData", async (req, res) => {
   try {
     const {
       hotelName,
@@ -94,6 +63,7 @@ app.post("/setHotelData",upload.single("selectedFile"),async (req, res) => {
       hotelAddress,
       hotelPrice,
       hotelDescription,
+      imgLink,
     } = req.body;
 
     const existingHotel = await hotelModel.findOne({ hotelName: hotelName });
@@ -108,7 +78,7 @@ app.post("/setHotelData",upload.single("selectedFile"),async (req, res) => {
         hotelAddress: hotelAddress,
         hotelPrice: hotelPrice,
         hotelDescription: hotelDescription,
-        fileId: req.file.id,
+        imgLink: imgLink,
       });
       console.log(hotel);
       res.status(200).send({message:"Hotel added to the database"});

@@ -6,7 +6,7 @@ import axios from "axios";
 
 
 function AdminPage() {
-  const [selectedFile, setSelectedFile] = useState(null); // This is hotel Image
+  const [imgLink , setImgLink] = useState();
   const [hotelName, setHotelName] = useState();
   const [hotelCity,setHotelCity] = useState();
   const [hotelState,setHotelState] = useState();
@@ -16,30 +16,13 @@ function AdminPage() {
 
 
 
-  const handleFileChange = (event) => {
-    const file = event.target.files[0];
-    setSelectedFile(file);
-  };
 
   const handleSubmit = async () => {
 
-    if(hotelName && hotelCity && hotelState && hotelAddress && hotelPrice && hotelDescription && selectedFile){
+    if(hotelName && hotelCity && hotelState && hotelAddress && hotelPrice && hotelDescription && imgLink){
       // From here we are going to send the data to the backend and then save the data in the Database
-
-      const formData = new FormData();
-      formData.append("hotelName", hotelName);
-      formData.append("hotelCity", hotelCity);
-      formData.append("hotelState", hotelState);
-      formData.append("hotelAddress", hotelAddress);
-      formData.append("hotelPrice", hotelPrice);
-      formData.append("hotelDescription", hotelDescription);
-      formData.append("selectedFile", selectedFile);
-
-
-      await axios.post("http://localhost:5000/setHotelData", formData ,{
-        headers: {
-          "Content-Type": "multipart/form-data",
-        }}).then((res)=>{
+      await axios.post("http://localhost:5000/setHotelData",{hotelName,hotelCity,hotelState,hotelAddress,hotelPrice,hotelDescription,imgLink})
+      .then((res)=>{
         toast.success("Hotel added to the database", {
           position: "top-center",
           autoClose: 5000,
@@ -155,7 +138,7 @@ function AdminPage() {
               <input
                 type="number"
                 className={Style.hotelRoomPrice}
-                placeholder="Price"
+                placeholder="Price(Room)"
                 value={hotelPrice}
                 onChange={(e)=>setHotelPrice(e.target.value)}
               />
@@ -174,13 +157,9 @@ function AdminPage() {
                 {/* <PhotoUpload/> */}
                 <h2 className={Style.uploadFileHeading}>Upload a Photo</h2>
                 <div className={Style.imageForm}>
-                {/* Here we are taking the image from the user  */}
-                  <input
-                    type="file"
-                    accept="image/*"
-                    onChange={handleFileChange}
-                    className={Style.imageInputField}
-                  />
+                  <p className={Style.copyPara1}>Copy the image address and paste the address below.</p>
+                  <p className={Style.notePara1}>*Note : The image should be there on the browser.</p>
+                  <input type="text" className={Style.hotelImgLinkInput} value={imgLink} onChange={(e)=>setImgLink(e.target.value)}/>
                 </div>
               </div>
             </div>

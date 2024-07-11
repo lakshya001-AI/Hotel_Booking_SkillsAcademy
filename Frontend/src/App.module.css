@@ -664,3 +664,20 @@ html, body{
     margin-top: 70px;
     margin-bottom: -40px;
 }
+
+.copyPara1{
+    margin-top: 10px;
+}
+
+.notePara1{
+    color: red;
+}
+
+.hotelImgLinkInput{
+    width: 20vmax;
+    margin-top: 40px;
+    padding: 10px;
+    font-family: "Poppins", sans-serif;
+
+
+}

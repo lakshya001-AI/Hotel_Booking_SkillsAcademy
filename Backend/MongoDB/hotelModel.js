@@ -7,7 +7,7 @@ const hotelDataSchema = mongoose.Schema({
   hotelAddress: { type: String, required: true },
   hotelPrice: { type: Number, required: true },
   hotelDescription: { type: String, required: true },
-  fileId: { type: mongoose.Schema.Types.ObjectId, ref: 'uploads.files', required: true }
+  imgLink: { type: String, required: true }
 });
 
 const hotelModel = mongoose.model("hotelModel", hotelDataSchema);

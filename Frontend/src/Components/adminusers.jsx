@@ -54,7 +54,9 @@ function AdminUsersPage() {
       {
         users.map((user) => (
           <div key={user._id} className={Style.usersDiv1}>
-            <p>{user.name}</p>
+            <p className={Style.userNameAdminPage}>{user.name}</p>
+            <p className={Style.userEmailAdminPage}>{user.email}</p>
+            <button className={Style.deleteUserBtn}>Delete</button>
           </div>
         ))
       }

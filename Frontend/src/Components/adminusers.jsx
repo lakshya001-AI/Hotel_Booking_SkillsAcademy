@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Style from "../App.module.css"
 import { Link } from 'react-router-dom';
 import axios from "axios";
+import {toast, ToastContainer} from "react-toastify"
 
 function AdminUsersPage() {
 
@@ -35,6 +36,56 @@ function AdminUsersPage() {
     getData();
   },[]);
 
+
+  async function deleteUser(userName){
+    try {
+      await axios.post("http://localhost:5000/deleteUser", {userName})
+      .then((res)=>{
+        if(res.status === 200){
+          toast.success("User has been deleted", {
+            position: "top-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: false,
+            progress: undefined,
+            theme: "colored",
+          });
+
+        }
+
+        setUsers(users.filter(user => user.name !== userName));
+
+      }).catch((error)=>{
+        toast.success("Error deleting the user", {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: false,
+          progress: undefined,
+          theme: "colored",
+        });
+
+
+      });
+      
+    } catch (error) {
+      toast.error("An internal error occurred", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: false,
+        progress: undefined,
+        theme: "colored",
+      });
+    }
+  }
+
   return <>
 
   <div className={Style.mainDivMainPage}>
@@ -56,7 +107,7 @@ function AdminUsersPage() {
           <div key={user._id} className={Style.usersDiv1}>
             <p className={Style.userNameAdminPage}>{user.name}</p>
             <p className={Style.userEmailAdminPage}>{user.email}</p>
-            <button className={Style.deleteUserBtn}>Delete</button>
+            <button className={Style.deleteUserBtn} onClick={()=> deleteUser(user.name)}>Delete</button>
           </div>
         ))
       }
@@ -64,6 +115,7 @@ function AdminUsersPage() {
 
   </div>
   </div>
+  <ToastContainer/>
 
 
   

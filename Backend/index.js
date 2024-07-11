@@ -34,6 +34,10 @@ app.post("/createUser", async (req, res) => {
 app.post("/loginUser", async (req, res) => {
   const { email, password } = req.body;
   const user = await userModel.findOne({ email: email });
+
+  if (!user) {
+    return res.status(401).send({ message: "No such user exits" });
+  }
   if (user.email === "adminhbooking@gmail.com") {
     return res.status(201).send({ message: "Admin login" });
   }
@@ -96,6 +100,14 @@ app.get("/getUsersDetails", async (req, res) => {
     res.status(200).send(users);
   } catch (error) {
     return res.status(500).send({ message: "Error:" + error });
+  }
+});
+
+app.post("/deleteUser", async (req, res) => {
+  const { userName } = req.body;
+  const user = await userModel.findOneAndDelete({ name: userName });
+  if (user) {
+    res.status(200).send({ message: "User delete Successfully" });
   }
 });
 

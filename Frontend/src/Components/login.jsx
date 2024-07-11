@@ -54,8 +54,8 @@ function LoginPage() {
 
         }
       }).catch((error)=>{
-        if(error.response && error.response.status === 400){
-          toast.error("Please Check Your Email and Password", {
+        if(error.response && error.response.status === 401){
+          toast.error("Account doesn't exits! Please create the account", {
             position: "top-right",
             autoClose: 5000,
             hideProgressBar: false,
@@ -66,8 +66,9 @@ function LoginPage() {
             theme: "colored",
           });
 
-        }else{
-          toast.warn("An internal error occurred", {
+        }
+        if(error.response && error.response.status === 400){
+          toast.error("Please Check Your Email and Password", {
             position: "top-right",
             autoClose: 5000,
             hideProgressBar: false,

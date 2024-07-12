@@ -31,21 +31,25 @@ app.post("/createUser", async (req, res) => {
   }
 });
 
-app.post("/loginUser", async (req, res) => {
-  const { email, password } = req.body;
-  const user = await userModel.findOne({ email: email });
+// app.post("/loginUser", async (req, res) => {
+//   const { email, password } = req.body;
+//   const user = await userModel.findOne({ email: email });
 
-  if (user.email === "adminhbooking@gmail.com") {
-    return res.status(201).send({ message: "Admin login" });
-  }
-  
-  const existingUser = await bcrypt.compare(password, user.password);
-  if (existingUser) {
-    return res.status(200).send({ message: "login successfully" });
-  } else {
-    return res.status(400).send({ message: "no password match" });
-  }
-});
+//   if (user.email === "adminhbooking@gmail.com") {
+//     return res.status(201).send({ message: "Admin login" });
+//   }
+
+//   const existingUser = await bcrypt.compare(password, user.password);
+//   if (existingUser) {
+//     res.status(200).json({ message: "login successfully", user:{
+//       id:user._id,
+//       email:user.email,
+//       name:user.name
+//     }});
+//   } else {
+//     return res.status(400).send({ message: "no password match" });
+//   }
+// });
 
 // app.get("/getUsers", async (req, res) => {
 //   try {
@@ -55,6 +59,40 @@ app.post("/loginUser", async (req, res) => {
 //     console.log(error);
 //   }
 // });
+
+app.post("/loginUser", async (req, res) => {
+  const { email, password } = req.body;
+
+  try {
+    const user = await userModel.findOne({ email: email });
+
+    if (!user) {
+      return res.status(404).send({ message: "User not found" });
+    }
+
+    if (user.email === "adminhbooking@gmail.com") {
+      return res.status(201).send({ message: "Admin login" });
+    }
+
+    const existingUser = await bcrypt.compare(password, user.password);
+    if (existingUser) {
+      res.status(200).json({
+        message: "login successfully",
+        user: {
+          id: user._id,
+          email: user.email,
+          name: user.name,
+        },
+      });
+    } else {
+      return res.status(400).send({ message: "Password does not match" });
+    }
+  } catch (error) {
+    console.error("Error during login:", error);
+    return res.status(500).send({ message: "Server error" });
+  }
+});
+
 
 app.post("/setHotelData", async (req, res) => {
   try {

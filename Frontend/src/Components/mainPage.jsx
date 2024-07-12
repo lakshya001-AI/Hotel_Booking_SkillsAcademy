@@ -65,7 +65,7 @@ export default function MainPage() {
           </div>
           <div className={Style.loginAndCreateAccountDiv}>
             <Link className={Style.userProfileBtn} to="/ProfilePage">Profile</Link>
-            <Link className={Style.logoutBtn}>logout</Link>
+            <Link className={Style.logoutBtn} to="/">logout</Link>
           </div>
           </div>
         </div>

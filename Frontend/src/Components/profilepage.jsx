@@ -88,6 +88,7 @@ function ProfilePage() {
             <p className={Style.headingPara}>HBooking</p>
           </div>
           <div className={Style.loginAndCreateAccountDiv}>
+          <Link className={Style.userProfileBtn} to="/mainPage">Home</Link>
             <Link className={Style.userProfileBtn} to="/ProfilePage">
               Profile
             </Link>
@@ -97,8 +98,8 @@ function ProfilePage() {
         </div>
 
         <div className={Style.profileInfoDiv}>
-          <p>{username}</p>
-          <p>{email}</p>
+          <p className={Style.usernamePara}>{`Hello ${username},`}</p>
+          <p className={Style.userEmailPara}>{`Email : ${email}`}</p>
         </div>
       </div>
     </>

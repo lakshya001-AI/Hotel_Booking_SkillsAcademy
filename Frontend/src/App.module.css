@@ -821,3 +821,17 @@ html, body{
     align-items: center;
     justify-content: center; 
 }
+
+.usernamePara{
+    font-size: 31px;
+    font-weight: 800;
+    margin-left: 90px;
+    margin-top: 20px;
+}
+
+.userEmailPara{
+    font-size: 21px;
+    font-weight: 500;
+    margin-left: 90px;
+}
+

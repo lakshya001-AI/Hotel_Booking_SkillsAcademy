@@ -93,7 +93,6 @@ app.post("/loginUser", async (req, res) => {
   }
 });
 
-
 app.post("/setHotelData", async (req, res) => {
   try {
     const {
@@ -144,6 +143,23 @@ app.post("/deleteUser", async (req, res) => {
   const user = await userModel.findOneAndDelete({ name: userName });
   if (user) {
     res.status(200).send({ message: "User delete Successfully" });
+  }
+});
+
+// ------------------------------- Hotel Data Routes ------------------------- //
+
+app.post("/getHotelDetails", async (req, res) => {
+  try {
+    const { destination, checkIn, checkOut, guest } = req.body;
+    const hotels = await hotelModel.find({ hotelCity: destination });
+    if (hotels.length > 0) {
+      res.json(hotels); // Send all matching hotels as a JSON response
+    } else {
+      res.status(404).json({ message: "No hotels found for the given destination." });
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal server error." });
   }
 });
 

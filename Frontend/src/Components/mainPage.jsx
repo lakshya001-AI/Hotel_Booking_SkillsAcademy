@@ -5,6 +5,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 
 
@@ -15,18 +16,8 @@ export default function MainPage() {
   const[checkIn, setCheckIn] = useState();
   const[checkOut, setCheckOut] = useState();
   const[guest, setGuest] = useState();
-  const[showProfileDetails, setShowProfileDetails] = useState(false);
-
-  function handleProfileClick(){
-    setShowProfileDetails(!showProfileDetails);
-}
-
-
-
-
-
-  let getBookingDetails = () => {
-
+  
+  let getBookingDetails = async () => {
     if (!destination || !checkIn || !checkOut || !guest) {
       toast.error('All fields are required', {
         position: "top-center",
@@ -38,20 +29,60 @@ export default function MainPage() {
         progress: undefined,
         theme: "colored",
       });
-    } else {
-      let dataObj = {
+      return; // Exit the function early if validation fails
+    }
+  
+    try {
+      const response = await axios.post("http://localhost:5000/getHotelDetails", {
         destination: destination,
         checkIn: checkIn,
         checkOut: checkOut,
         guest: guest
-      };
-      console.log(dataObj);
+      });
+      toast.success('Got the data', {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: false,
+        progress: undefined,
+        theme: "colored",
+      });
+      // Do something with the response data if needed
+      console.log(response.data);
+    } catch (error) {
+      if (error.response && error.response.status === 404) {
+        toast.error('No Hotels found for the given destination', {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: false,
+          progress: undefined,
+          theme: "colored",
+        });
+      } else {
+        toast.error('An error occurred. Please try again later.', {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: false,
+          progress: undefined,
+          theme: "colored",
+        });
+      }
+      console.error(error); // Log the error for debugging purposes
     }
+  };
+  
 
-  }
 
   return (
-    <>
+  <>
       <div className={Style.mainDivMainPage}>
         {/* Navbar section that will contain the login and create account and the user Profile (if the user successful login )*/}
         <div className={Style.navBar}>
@@ -133,5 +164,5 @@ export default function MainPage() {
       <ToastContainer />
 
     </>
-  );
+);
 }

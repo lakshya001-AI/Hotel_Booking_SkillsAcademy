@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import Style from "../App.module.css";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { Link } from "react-router-dom";
 
 
@@ -13,6 +15,12 @@ export default function MainPage() {
   const[checkIn, setCheckIn] = useState();
   const[checkOut, setCheckOut] = useState();
   const[guest, setGuest] = useState();
+  const[showProfileDetails, setShowProfileDetails] = useState(false);
+
+  function handleProfileClick(){
+    setShowProfileDetails(!showProfileDetails);
+}
+
 
 
 
@@ -56,7 +64,9 @@ export default function MainPage() {
             <p className={Style.headingPara}>HBooking</p>
           </div>
           <div className={Style.loginAndCreateAccountDiv}>
-            
+            <Link className={Style.userProfileBtn}>Profile</Link>
+            <Link className={Style.logoutBtn}>logout</Link>
+          </div>
           </div>
         </div>
         {/* Booking Data section and Search Button to search for the Hotels */}
@@ -119,8 +129,8 @@ export default function MainPage() {
         </div>
 
         {/* Hotel List based on the user data selected */}
-      </div>
       <ToastContainer />
+
     </>
   );
 }

@@ -64,7 +64,7 @@ export default function MainPage() {
             <p className={Style.headingPara}>HBooking</p>
           </div>
           <div className={Style.loginAndCreateAccountDiv}>
-            <Link className={Style.userProfileBtn}>Profile</Link>
+            <Link className={Style.userProfileBtn} to="/ProfilePage">Profile</Link>
             <Link className={Style.logoutBtn}>logout</Link>
           </div>
           </div>

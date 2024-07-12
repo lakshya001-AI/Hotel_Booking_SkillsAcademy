@@ -35,12 +35,10 @@ app.post("/loginUser", async (req, res) => {
   const { email, password } = req.body;
   const user = await userModel.findOne({ email: email });
 
-  if (!user) {
-    return res.status(401).send({ message: "No such user exits" });
-  }
   if (user.email === "adminhbooking@gmail.com") {
     return res.status(201).send({ message: "Admin login" });
   }
+  
   const existingUser = await bcrypt.compare(password, user.password);
   if (existingUser) {
     return res.status(200).send({ message: "login successfully" });

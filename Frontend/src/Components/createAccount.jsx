@@ -17,6 +17,10 @@ function CreateAccount() {
     if (name && email && password) {
       await axios.post("http://localhost:5000/createUser",{name:name,email:email,password:password})
       .then((res)=>{
+
+        if(res.status === 200){
+
+        
         toast.success("Account Created Successfully! Please login with email and password", {
           position: "top-right",
           autoClose: 5000,
@@ -31,6 +35,7 @@ function CreateAccount() {
         setTimeout(()=>{
           navigate("/");
         },5000);      
+      }
       }).catch((error)=>{
         if (error.response && error.response.status === 409) {
           toast.error("User already exists", {

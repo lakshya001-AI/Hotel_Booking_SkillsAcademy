@@ -95,6 +95,7 @@ function AdminPage() {
               <Link className={Style.usersBtn} to="/adminUsersPage">
                 Users
               </Link>
+              <Link className={Style.usersBtn} to="/">logout</Link>
             </div>
           </div>
 

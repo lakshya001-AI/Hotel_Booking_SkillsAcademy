@@ -96,6 +96,7 @@ function AdminUsersPage() {
       <div className={Style.adminNavButtonDiv}>
       <Link className={Style.addHotelBtn} to="/adminPage">Add Hotel</Link>
       <Link className={Style.usersBtn} to="/adminUsersPage">Users</Link>
+      <Link className={Style.usersBtn} to="/">logout</Link>
       </div>
 
 

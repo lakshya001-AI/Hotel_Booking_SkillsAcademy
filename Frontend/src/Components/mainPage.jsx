@@ -56,8 +56,7 @@ export default function MainPage() {
             <p className={Style.headingPara}>HBooking</p>
           </div>
           <div className={Style.loginAndCreateAccountDiv}>
-            <Link className={Style.loginBtn} to="/loginPage">login</Link>
-            <Link className={Style.createAccountBtn} to="/createAccount">Create Account</Link>
+            
           </div>
         </div>
         {/* Booking Data section and Search Button to search for the Hotels */}

@@ -501,6 +501,7 @@ html, body{
     border-radius: 30px;
     cursor: pointer;
     text-decoration: none;
+    margin-right: 10px;
 }
 
 .usersBtn:hover{

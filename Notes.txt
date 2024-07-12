@@ -28,3 +28,8 @@ flow to make this -
    Hotel Data we have to take - hotel name , location , city , state, price per room , hotel photo , Hotel description.
 2. Create the new model to save the data
 2. Take the data from the Frontend and store the data in the database from the Backend.
+
+
+-------------------------------------- Profile Page ----------------------------------------
+
+

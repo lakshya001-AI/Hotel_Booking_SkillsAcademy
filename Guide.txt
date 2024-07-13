@@ -1,0 +1,16 @@
+HBooking is a hotel booking MERN Stack Project
+
+Admin login Details : ** Please enter this details in order to login as a admin 
+Email: adminhbooking@gmail.com
+Password: admin@123
+
+On the Admin Page we can perform following Operation
+
+1. Add the hotel
+2. Delete the user 
+
+*** user operations ***
+
+1. Create Account
+2. Login using email and password 
+3. Search for Hotel - ** Search the hotel that you have added in the admin Panel

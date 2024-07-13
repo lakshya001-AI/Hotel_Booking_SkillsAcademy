@@ -163,6 +163,80 @@ app.post("/getHotelDetails", async (req, res) => {
   }
 });
 
+
+// Here we are going to insert the data into the user data the hotel that they have selected
+
+app.post("/insertHotel", async (req, res)=>{
+  try {
+    const {hotelName, hotelAddress, hotelPrice , email} = req.body;
+    const user = await userModel.findOne({email:email});
+    if(user){
+
+      const hotelExits = user.selectedHotels.some(item=>
+        item.hotelName === hotelName && item.hotelAddress === hotelAddress && item.hotelPrice === hotelPrice
+      );
+
+      if(hotelExits){
+        res.status(201).send({message:"Hotel Already Exits"});
+      }else{
+        user.selectedHotels.push({hotelName,hotelAddress,hotelPrice});
+        await user.save();
+        res.status(200).send({message:"Hotel Added"});
+      }
+
+
+    }else{
+      res.status(404).send({message:"user not found"});
+    }
+    
+  } catch (error) {
+    res.status(500).send({message:"An error occurred",error});
+  }
+
+});
+
+app.post("/getUserHotels", async (req, res)=>{
+  const { email } = req.body;
+  try {
+    const user = await userModel.findOne({ email: email });
+    if (user) {
+        res.status(200).json(user.selectedHotels);
+    } else {
+        res.status(404).send('User not found');
+    }
+} catch (err) {
+    res.status(500).send('Server error');
+}
+
+});
+
+app.post("/removeItemFromData", async (req, res) => {
+  const { email, index } = req.body;
+  console.log("Received request to remove item", { email, index }); // Add this line
+
+  try {
+    const user = await userModel.findOne({ email: email });
+    if (user) {
+      console.log("User found: ", user); // Add this line
+      if (index >= 0 && index < user.selectedHotels.length) {
+        user.selectedHotels.splice(index, 1);
+        await user.save();
+        console.log("Item removed and user saved"); // Add this line
+        res.status(200).send("Item removed from cart");
+      } else {
+        console.log("Invalid item index"); // Add this line
+        res.status(400).send("Invalid item index");
+      }
+    } else {
+      console.log("User not found"); // Add this line
+      res.status(404).send("User not found");
+    }
+  } catch (error) {
+    console.error("Server error: ", error); // Add this line
+    res.status(500).send("Server error");
+  }
+});
+
 const PORT = process.env.PORT;
 app.listen(PORT, () => {
   console.log(`Server is running on the Port ${PORT}`);

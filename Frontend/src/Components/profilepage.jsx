@@ -15,21 +15,63 @@ function ProfilePage() {
 
   useEffect(() => {
     const storedUser = JSON.parse(localStorage.getItem("userData"));
-    const storedBookings =
-      JSON.parse(localStorage.getItem("bookedHotels")) || [];
 
     if (storedUser) {
       setUserName(storedUser.name);
       setEmail(storedUser.email);
     }
 
-    setBookedHotels(storedBookings);
-  }, []);
+  },[]);
+
+  useEffect(() => {
+    axios.post("http://localhost:5000/getUserHotels", { email })
+      .then((res) => setBookedHotels(res.data))
+      .catch((err) => console.log(err));
+  }, [email]);
 
   const handleLogout = () => {
     localStorage.removeItem("userData");
     navigate("/login"); // Redirect to login page after logout
   };
+
+  const removeHotel = (indexToRemove) => {
+    const updatedHotel = bookedHotels.filter((_, index) => index !== indexToRemove);
+    setBookedHotels(updatedHotel);
+  
+    axios.post("http://localhost:5000/removeItemFromData", {
+      email: email,
+      index: indexToRemove
+    })
+    .then((res) => {
+      console.log("Response received: ", res); // Add this line
+      if (res.status === 200) {
+        toast.success("Booking Cancelled", {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: false,
+          progress: undefined,
+          theme: "colored",
+        });
+      }
+    })
+    .catch((error) => {
+      console.error("Error: ", error); // Add this line
+      toast.error("An internal error occurred", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: false,
+        progress: undefined,
+        theme: "colored",
+      });
+    });
+  };
+  
 
   console.log(username);
   console.log(email);
@@ -80,7 +122,7 @@ function ProfilePage() {
 
                 <div className={Style.priceAndCancelDiv}>
                   <p className={Style.pricePara}>{`₹${hotel.hotelPrice}`}</p>
-                  <button className={Style.bookBtn}>Cancel</button>
+                  <button className={Style.bookBtn} onClick={()=>removeHotel(index)}>Cancel</button>
                 </div>
               </div>
             ))
@@ -91,6 +133,7 @@ function ProfilePage() {
           )}
         </div>
       </div>
+      <ToastContainer/>
     </>
   );
 }

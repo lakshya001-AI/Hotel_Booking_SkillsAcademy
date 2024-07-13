@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Style from "../App.module.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -14,6 +14,14 @@ export default function MainPage() {
   const [checkOut, setCheckOut] = useState();
   const [guest, setGuest] = useState();
   const [hotelData , setHotelData] = useState([]);
+  const [email, setEmail] = useState("");
+
+  useEffect(()=>{
+    const storedUser = JSON.parse(localStorage.getItem("userData"));
+    if(storedUser){
+      setEmail(storedUser.email);
+    }
+  },[]);
 
   let getBookingDetails = async () => {
     if (!destination || !checkIn || !checkOut || !guest) {
@@ -81,46 +89,63 @@ export default function MainPage() {
     }
   };
 
-  let bookHotel = (hotelName, hotelAddress, hotelPrice) =>{
-    let hotel = {
-      hotelName:hotelName,
-      hotelAddress:hotelAddress,
-      hotelPrice:hotelPrice
-    }
+  let bookHotel = async (hotelName, hotelAddress, hotelPrice) =>{
+    await axios.post("http://localhost:5000/insertHotel",{hotelName,hotelAddress,hotelPrice,email})
+    .then((res)=>{
+      if(res.status === 201){
+        toast.error("Hotel Already booked! check your Profile", {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: false,
+          progress: undefined,
+          theme: "colored",
+        });
 
-    const storedBookings = JSON.parse(localStorage.getItem("bookedHotels")) || [];
-    const isHotelAlreadyBooked = storedBookings.some(
-      (storedHotel) => storedHotel.hotelName === hotel.hotelName
-    );
-  
-    if (isHotelAlreadyBooked) {
-      toast.error("Hotel Already Booked! Check your profile", {
-        position: "top-center",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: false,
-        progress: undefined,
-        theme: "colored",
-      });
-    } else {
-      storedBookings.push(hotel);
-      localStorage.setItem("bookedHotels", JSON.stringify(storedBookings));
-      toast.success("Hotel Booked! Check your Profile", {
-        position: "top-center",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: false,
-        progress: undefined,
-        theme: "colored",
-      });
-    }
-  
-    console.log(storedBookings);
-  
+      } else{
+        toast.success("Hotel booked! check your Profile", {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: false,
+          progress: undefined,
+          theme: "colored",
+        });
+
+      }
+
+    }).catch((error)=>{
+
+      if(error.response && error.response.status === 404){
+        toast.error("User not Found", {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: false,
+          progress: undefined,
+          theme: "colored",
+        });
+      }else{
+        toast.error("An internal error occurred", {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: false,
+          progress: undefined,
+          theme: "colored",
+        });
+      }
+
+    });
+
   }
 
   return (
@@ -248,29 +273,6 @@ export default function MainPage() {
       }
       </div>
       <ToastContainer />
-      {/* <div className={Style.hotelBookDiv}>
-          <div className={Style.hotelImgDiv}>
-            <img src="https://radissonhotels.iceportal.com/image/radisson-hotel-mumbai-goregaon/exterior/16256-114082-f63669352_3xl.jpg" />
-          </div>
-
-          <div className={Style.hotelInfoDiv}>
-            <p className={Style.hotelNamePara}>Hotel Holiday Inn</p>
-            <p className={Style.hotelAddressPara}>
-              <FontAwesomeIcon icon={faMapMarkerAlt} className={Style.iconColor}/>{`123 Main Street,
-              Anytown, Mumbai`}
-            </p>
-            <p className={Style.hotelDescriptionPara}>{`Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci cupiditate pariatur magnam eveniet! Id aut atque, ratione in harum reiciendis?`}</p>
-            <div className={Style.priceDivMain}>
-              <div className={Style.priceDiv}>
-                <p className={Style.pricePara}>{`₹9000`}</p>
-                <p className={Style.nightRoomPara}>1 Room per night</p>
-              </div>
-              <div className={Style.bookBtnDiv}>
-                <button className={Style.bookBtn}>book</button>
-              </div>
-            </div>
-          </div>
-        </div> */}
     </>
   );
 }

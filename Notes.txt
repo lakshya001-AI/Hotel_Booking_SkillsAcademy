@@ -34,6 +34,8 @@ flow to make this -
 
 1. create the profile section for the users and add the logout button into it 
 2. Take the hotel details from the user and match the hotel with the hotel save in the database and show it , add the booking button into it
-3. 
+
+
+ 
 
 

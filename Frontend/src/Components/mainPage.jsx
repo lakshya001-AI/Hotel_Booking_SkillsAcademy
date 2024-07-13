@@ -13,7 +13,7 @@ export default function MainPage() {
   const [checkIn, setCheckIn] = useState();
   const [checkOut, setCheckOut] = useState();
   const [guest, setGuest] = useState();
-  const [hotelData , setHotelData] = useState();
+  const [hotelData , setHotelData] = useState([]);
 
   let getBookingDetails = async () => {
     if (!destination || !checkIn || !checkOut || !guest) {
@@ -80,6 +80,48 @@ export default function MainPage() {
       console.error(error); // Log the error for debugging purposes
     }
   };
+
+  let bookHotel = (hotelName, hotelAddress, hotelPrice) =>{
+    let hotel = {
+      hotelName:hotelName,
+      hotelAddress:hotelAddress,
+      hotelPrice:hotelPrice
+    }
+
+    const storedBookings = JSON.parse(localStorage.getItem("bookedHotels")) || [];
+    const isHotelAlreadyBooked = storedBookings.some(
+      (storedHotel) => storedHotel.hotelName === hotel.hotelName
+    );
+  
+    if (isHotelAlreadyBooked) {
+      toast.error("Hotel Already Booked! Check your profile", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: false,
+        progress: undefined,
+        theme: "colored",
+      });
+    } else {
+      storedBookings.push(hotel);
+      localStorage.setItem("bookedHotels", JSON.stringify(storedBookings));
+      toast.success("Hotel Booked! Check your Profile", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: false,
+        progress: undefined,
+        theme: "colored",
+      });
+    }
+  
+    console.log(storedBookings);
+  
+  }
 
   return (
     <>
@@ -177,77 +219,58 @@ export default function MainPage() {
       {/* Hotel List based on the user data selected */}
 
       <div className={Style.listOfHotelDivMain}>
-        <div className={Style.hotelBookDiv}>
+      {
+        hotelData.map((hotel) => (
+          <div className={Style.hotelBookDiv} key={hotel._id}>
           <div className={Style.hotelImgDiv}>
-            <img src="https://radissonhotels.iceportal.com/image/radisson-hotel-mumbai-goregaon/exterior/16256-114082-f63669352_3xl.jpg" />
+            <img src={hotel.imgLink}/>
           </div>
 
           <div className={Style.hotelInfoDiv}>
-            <p className={Style.hotelNamePara}>Hotel Holiday Inn</p>
+            <p className={Style.hotelNamePara}>{hotel.hotelName}</p>
             <p className={Style.hotelAddressPara}>
-              <FontAwesomeIcon icon={faMapMarkerAlt} className={Style.iconColor}/>{`123 Main Street,
-              Anytown, Mumbai`}
+              <FontAwesomeIcon icon={faMapMarkerAlt} className={Style.iconColor}/>{`${hotel.hotelAddress}`}
             </p>
-            <p className={Style.hotelDescriptionPara}>{`Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci cupiditate pariatur magnam eveniet! Id aut atque, ratione in harum reiciendis?`}</p>
+            <p className={Style.hotelDescriptionPara}>{hotel.hotelDescription}</p>
             <div className={Style.priceDivMain}>
               <div className={Style.priceDiv}>
-                <p className={Style.pricePara}>{`₹9000`}</p>
+                <p className={Style.pricePara}>{`₹${hotel.hotelPrice}`}</p>
                 <p className={Style.nightRoomPara}>1 Room per night</p>
               </div>
               <div className={Style.bookBtnDiv}>
-                <button className={Style.bookBtn}>book</button>
+                <button className={Style.bookBtn} onClick={()=> bookHotel(hotel.hotelName, hotel.hotelAddress , hotel.hotelPrice)}>book</button>
               </div>
             </div>
           </div>
         </div>
-        <div className={Style.hotelBookDiv}>
-          <div className={Style.hotelImgDiv}>
-            <img src="https://radissonhotels.iceportal.com/image/radisson-hotel-mumbai-goregaon/exterior/16256-114082-f63669352_3xl.jpg" />
-          </div>
 
-          <div className={Style.hotelInfoDiv}>
-            <p className={Style.hotelNamePara}>Hotel Holiday Inn</p>
-            <p className={Style.hotelAddressPara}>
-              <FontAwesomeIcon icon={faMapMarkerAlt} className={Style.iconColor}/>{`123 Main Street,
-              Anytown, Mumbai`}
-            </p>
-            <p className={Style.hotelDescriptionPara}>{`Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci cupiditate pariatur magnam eveniet! Id aut atque, ratione in harum reiciendis?`}</p>
-            <div className={Style.priceDivMain}>
-              <div className={Style.priceDiv}>
-                <p className={Style.pricePara}>{`₹9000`}</p>
-                <p className={Style.nightRoomPara}>1 Room per night</p>
-              </div>
-              <div className={Style.bookBtnDiv}>
-                <button className={Style.bookBtn}>book</button>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className={Style.hotelBookDiv}>
-          <div className={Style.hotelImgDiv}>
-            <img src="https://radissonhotels.iceportal.com/image/radisson-hotel-mumbai-goregaon/exterior/16256-114082-f63669352_3xl.jpg" />
-          </div>
-
-          <div className={Style.hotelInfoDiv}>
-            <p className={Style.hotelNamePara}>Hotel Holiday Inn</p>
-            <p className={Style.hotelAddressPara}>
-              <FontAwesomeIcon icon={faMapMarkerAlt} className={Style.iconColor}/>{`123 Main Street,
-              Anytown, Mumbai`}
-            </p>
-            <p className={Style.hotelDescriptionPara}>{`Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci cupiditate pariatur magnam eveniet! Id aut atque, ratione in harum reiciendis?`}</p>
-            <div className={Style.priceDivMain}>
-              <div className={Style.priceDiv}>
-                <p className={Style.pricePara}>{`₹9000`}</p>
-                <p className={Style.nightRoomPara}>1 Room per night</p>
-              </div>
-              <div className={Style.bookBtnDiv}>
-                <button className={Style.bookBtn}>book</button>
-              </div>
-            </div>
-          </div>
-        </div>
+        ))
+      }
       </div>
       <ToastContainer />
+      {/* <div className={Style.hotelBookDiv}>
+          <div className={Style.hotelImgDiv}>
+            <img src="https://radissonhotels.iceportal.com/image/radisson-hotel-mumbai-goregaon/exterior/16256-114082-f63669352_3xl.jpg" />
+          </div>
+
+          <div className={Style.hotelInfoDiv}>
+            <p className={Style.hotelNamePara}>Hotel Holiday Inn</p>
+            <p className={Style.hotelAddressPara}>
+              <FontAwesomeIcon icon={faMapMarkerAlt} className={Style.iconColor}/>{`123 Main Street,
+              Anytown, Mumbai`}
+            </p>
+            <p className={Style.hotelDescriptionPara}>{`Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci cupiditate pariatur magnam eveniet! Id aut atque, ratione in harum reiciendis?`}</p>
+            <div className={Style.priceDivMain}>
+              <div className={Style.priceDiv}>
+                <p className={Style.pricePara}>{`₹9000`}</p>
+                <p className={Style.nightRoomPara}>1 Room per night</p>
+              </div>
+              <div className={Style.bookBtnDiv}>
+                <button className={Style.bookBtn}>book</button>
+              </div>
+            </div>
+          </div>
+        </div> */}
     </>
   );
 }

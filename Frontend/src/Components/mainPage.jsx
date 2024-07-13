@@ -13,6 +13,7 @@ export default function MainPage() {
   const [checkIn, setCheckIn] = useState();
   const [checkOut, setCheckOut] = useState();
   const [guest, setGuest] = useState();
+  const [hotelData , setHotelData] = useState();
 
   let getBookingDetails = async () => {
     if (!destination || !checkIn || !checkOut || !guest) {
@@ -50,6 +51,7 @@ export default function MainPage() {
         theme: "colored",
       });
       // Do something with the response data if needed
+      setHotelData(response.data);
       console.log(response.data);
     } catch (error) {
       if (error.response && error.response.status === 404) {
@@ -175,6 +177,29 @@ export default function MainPage() {
       {/* Hotel List based on the user data selected */}
 
       <div className={Style.listOfHotelDivMain}>
+        <div className={Style.hotelBookDiv}>
+          <div className={Style.hotelImgDiv}>
+            <img src="https://radissonhotels.iceportal.com/image/radisson-hotel-mumbai-goregaon/exterior/16256-114082-f63669352_3xl.jpg" />
+          </div>
+
+          <div className={Style.hotelInfoDiv}>
+            <p className={Style.hotelNamePara}>Hotel Holiday Inn</p>
+            <p className={Style.hotelAddressPara}>
+              <FontAwesomeIcon icon={faMapMarkerAlt} className={Style.iconColor}/>{`123 Main Street,
+              Anytown, Mumbai`}
+            </p>
+            <p className={Style.hotelDescriptionPara}>{`Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci cupiditate pariatur magnam eveniet! Id aut atque, ratione in harum reiciendis?`}</p>
+            <div className={Style.priceDivMain}>
+              <div className={Style.priceDiv}>
+                <p className={Style.pricePara}>{`₹9000`}</p>
+                <p className={Style.nightRoomPara}>1 Room per night</p>
+              </div>
+              <div className={Style.bookBtnDiv}>
+                <button className={Style.bookBtn}>book</button>
+              </div>
+            </div>
+          </div>
+        </div>
         <div className={Style.hotelBookDiv}>
           <div className={Style.hotelImgDiv}>
             <img src="https://radissonhotels.iceportal.com/image/radisson-hotel-mumbai-goregaon/exterior/16256-114082-f63669352_3xl.jpg" />
